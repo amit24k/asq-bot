@@ -12,6 +12,12 @@ app.use(bodyParser.json());
 // app.listen(port, function() {
 //   console.log('Bot is listening on port ' + port)
 // });
+
+slackEvents.on('message', (event) => {
+  console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text}`);
+});
+
+
 slackEvents.start(port).then(() => {
   // Listening on path '/slack/events' by default
   console.log(`server listening on port ${port}`);
