@@ -17,12 +17,12 @@ app.use(bodyParser.json());
 
 slackEvents.on('message', async (event) => {
   console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text}`);
-  const res = await webClient.chat.postMessage({text:"hi",channel: event.channel});
+  // const res = await webClient.chat.postMessage({text:"hi",channel: event.channel});
   console.log('Message sent: ', res);
 });
 
 
 // Starts server
 app.listen(port, function() {
-  console.log('Bot is listening on port ' + port)
+  console.log('Bot is listening on port ' + port);
 });
