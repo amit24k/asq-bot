@@ -35,7 +35,7 @@ slackEvents.on('message', async (event) => {
     console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS);
 
     // Create a new session
-    const sessionClient = new dialogflow.SessionsClient();
+    const sessionClient = new dialogflow.SessionsClient({projectId,process.env.GOOGLE_APPLICATION_CREDENTIALS});
     const sessionPath = sessionClient.projectAgentSessionPath(projectId, sessionId);
 
     // The text query request.
