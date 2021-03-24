@@ -15,8 +15,8 @@ app.use('/slack/events', slackEvents.expressMiddleware())
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-slackEvents.on('message', async (event) => {
-  console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text}`);
+slackEvents.on('message.im', async (event) => {
+  // console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text}`);
   console.log(event);
   // const res = await webClient.chat.postMessage({text:"hi",channel: event.channel});
   // console.log('Message sent: ', res);
