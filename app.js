@@ -32,6 +32,7 @@ slackEvents.on('message', async (event) => {
     // console.log('Message sent: ', res);
     // A unique identifier for the given session
     const sessionId = uuid.v4();
+    console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS);
 
     // Create a new session
     const sessionClient = new dialogflow.SessionsClient();
