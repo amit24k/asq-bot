@@ -1,3 +1,4 @@
+"use strict";
 const express = require('express');
 const bodyParser = require('body-parser');
 const dialogflow = require('@google-cloud/dialogflow');
@@ -19,50 +20,49 @@ app.use(bodyParser.json());
 
 const projectId = process.env.projectId;
 
-async function runSample(projectId) {
-
-}
-
 slackEvents.on('message', async (event) => {
-  // console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text}`);
-  console.log(event);
-  if(event.bot_id == undefined){
+  try{
+    // console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text}`);
+    console.log(event);
+    if(event.bot_id == undefined){
 
-    // const res = await webClient.chat.postMessage({text:event.text ,channel: event.channel});
-    // console.log('Message sent: ', res);
-    // A unique identifier for the given session
-    const sessionId = uuid.v4();
+      // const res = await webClient.chat.postMessage({text:event.text ,channel: event.channel});
+      // console.log('Message sent: ', res);
+      // A unique identifier for the given session
+      const sessionId = uuid.v4();
 
-    // Create a new session
-    const sessionClient = new dialogflow.SessionsClient();
-    const sessionPath = sessionClient.projectAgentSessionPath(projectId, sessionId);
+      // Create a new session
+      const sessionClient = new dialogflow.SessionsClient();
+      const sessionPath = sessionClient.projectAgentSessionPath(projectId, sessionId);
 
-    // The text query request.
-    const request = {
-      session: sessionPath,
-      queryInput: {
-        text: {
-          // The query to send to the dialogflow agent
-          text: event.text,
-          // The language used by the client (en-US)
-          languageCode: 'en-US',
+      // The text query request.
+      const request = {
+        session: sessionPath,
+        queryInput: {
+          text: {
+            // The query to send to the dialogflow agent
+            text: event.text,
+            // The language used by the client (en-US)
+            languageCode: 'en-US',
+          },
         },
-      },
-    };
+      };
 
-    // Send request and log result
-    const responses = await sessionClient.detectIntent(request);
-    console.log('Detected intent');
-    const result = responses[0].queryResult;
-    console.log(`  Query: ${result.queryText}`);
-    console.log(`  Response: ${result.fulfillmentText}`);
-    if (result.intent) {
-      console.log(`  Intent: ${result.intent.displayName}`);
-    } else {
-      console.log(`  No intent matched.`);
+      // Send request and log result
+      const responses = await sessionClient.detectIntent(request);
+      console.log('Detected intent');
+      const result = responses[0].queryResult;
+      console.log(`  Query: ${result.queryText}`);
+      console.log(`  Response: ${result.fulfillmentText}`);
+      if (result.intent) {
+        console.log(`  Intent: ${result.intent.displayName}`);
+      } else {
+        console.log(`  No intent matched.`);
+      }
     }
+  } catch (error) {
+    console.error(error);
   }
-
 
 });
 
@@ -71,4 +71,5 @@ slackEvents.on('message', async (event) => {
 app.listen(port, function() {
   console.log('Bot is listening on port ' + port);
   console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS);
+  // console.log(process.env.GOOGLE_CREDENTIALS.json);
 });
