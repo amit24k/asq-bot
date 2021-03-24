@@ -32,10 +32,9 @@ slackEvents.on('message', async (event) => {
     // console.log('Message sent: ', res);
     // A unique identifier for the given session
     const sessionId = uuid.v4();
-    console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS);
 
     // Create a new session
-    const sessionClient = new dialogflow.SessionsClient({projectId,process.env.GOOGLE_APPLICATION_CREDENTIALS});
+    const sessionClient = new dialogflow.SessionsClient();
     const sessionPath = sessionClient.projectAgentSessionPath(projectId, sessionId);
 
     // The text query request.
@@ -71,4 +70,5 @@ slackEvents.on('message', async (event) => {
 // Starts server
 app.listen(port, function() {
   console.log('Bot is listening on port ' + port);
+  console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS);
 });
