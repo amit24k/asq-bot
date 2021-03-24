@@ -1,0 +1,23 @@
+{
+  "name": "asq-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amit24k/asq-bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amit24k/asq-bot/issues"
+  },
+  "homepage": "https://github.com/amit24k/asq-bot#readme",
+  "dependencies": {
+    "@slack/events-api": "^3.0.0",
+    "express": "^4.17.1"
+  }
+}
