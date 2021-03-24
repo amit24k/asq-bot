@@ -1,12 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const    = require('@slack/web-api');
-
 
 const port = process.env.PORT || 3000;
 const app = express();
+
 const { createEventAdapter } = require('@slack/events-api');
 const slackEvents = createEventAdapter(process.env.SLACK_SIGNING_SECRET);
+
+const  { WebClient } = require('@slack/web-api');
 const token = process.env.SLACK_BOT_TOKEN;
 const webClient = new WebClient(token);
 
